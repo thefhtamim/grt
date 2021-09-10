@@ -1,1 +1,43 @@
 <button id="download-file" data-url="http://localhost/js/download.zip">Download Now</button>
+
+<!-- JavaScript part -->
+
+  <script type="text/javascript">
+    // Total seconds to wait
+    var seconds = 10;
+
+    var downloadButton = document.getElementById("download-file");
+    
+    var download_url = downloadButton.getAttribute("data-url");
+
+    downloadButton.addEventListener("click", download_button_event);
+
+    function download_button_event() {
+
+        var newElement = document.createElement("p");
+        newElement.id = "countdown_seconds";
+        newElement.innerHTML = "Automatically file will be downloaded in 10 seconds.";
+        downloadButton.parentNode.replaceChild(newElement, downloadButton);
+
+        download_timer();
+
+    }
+
+    function download_timer() {
+
+        seconds = seconds - 1;
+
+        if (seconds < 0) {
+            // Download link
+            window.location = download_url;
+        } else {
+
+            // Update remaining seconds
+            document.getElementById("countdown_seconds").innerHTML = "Automatically file will be downloaded in " + seconds + " seconds.";
+            // Countdown wait time is 1 second
+            window.setTimeout("download_timer()", 1000);
+        }
+    }
+
+
+</script>
